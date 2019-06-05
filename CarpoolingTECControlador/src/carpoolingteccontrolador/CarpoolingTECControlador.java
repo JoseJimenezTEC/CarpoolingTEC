@@ -5,6 +5,8 @@
  */
 package carpoolingteccontrolador;
 
+import conexiones.ServidorHTTP;
+
 /**
  *
  * @author jeja1
@@ -15,7 +17,8 @@ public class CarpoolingTECControlador {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        ServidorHTTP servidor = ServidorHTTP.getInstancia();
+        servidor.iniciar();
     }
     
 }
