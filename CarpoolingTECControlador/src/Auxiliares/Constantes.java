@@ -12,5 +12,5 @@ package Auxiliares;
  */
 public class Constantes {
     public static final int Constante_Puerto = 9090;
-    public static final String Constante_IP = "192.168.1.197"; 
+    public static final String Constante_IP = "172.18.229.23"; 
 }

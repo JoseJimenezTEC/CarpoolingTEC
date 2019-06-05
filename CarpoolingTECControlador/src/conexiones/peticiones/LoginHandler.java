@@ -8,7 +8,13 @@ package conexiones.peticiones;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -21,12 +27,20 @@ public class LoginHandler implements HttpHandler{
         if(he.getRequestMethod().compareTo("GET")==0){
             
         }else if(he.getRequestMethod().compareTo("POST")==0){
-            System.out.println(he.getRequestMethod()+ " /");
-            he.sendResponseHeaders(200, 0);
-            OutputStream os = he.getResponseBody();
-            String respuesta = "Informacion Recibida";
-            os.write(respuesta.toString().getBytes());
-            os.close();
+            try {
+                System.out.println(he.getRequestMethod()+ " /");
+                JSONParser jsonParser = new JSONParser();
+                JSONObject JSONIngreso = (JSONObject) jsonParser.
+                        parse(new InputStreamReader(he.getRequestBody()));
+                System.out.println(JSONIngreso.toJSONString());
+                he.sendResponseHeaders(200, 0);
+                OutputStream os = he.getResponseBody();
+                String respuesta = "Informacion Recibida";
+                os.write(respuesta.toString().getBytes());
+                os.close();
+            } catch (ParseException ex) {
+                Logger.getLogger(LoginHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
